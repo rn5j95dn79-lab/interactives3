@@ -1,6 +1,3 @@
-
-
-Ocean chemistry interactive · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,155 +5,155 @@ Ocean chemistry interactive · HTML
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Ocean's Chemistry — Interactive Companion</title>
 <style>
-  :root{
-    --navy: #0B2E4F;
-    --navy-dark: #071D33;
-    --teal: #1C7293;
-    --teal-light: #6FA8C4;
-    --gold: #D4AF37;
-    --gold-light: #E9CD6F;
-    --foam: #EAF2F5;
-    --ink: #142433;
-    --muted: #5C7080;
-    --card: #FFFFFF;
-    --acid: #C0524A;
-  }
-  *{ box-sizing: border-box; }
-  html,body{ margin:0; padding:0; font-family: Georgia, Cambria, "Times New Roman", serif; background: var(--foam); color: var(--ink); }
-  .sans{ font-family: Calibri, Arial, "Segoe UI", sans-serif; }
+ :root{
+   --navy: #0B2E4F;
+   --navy-dark: #071D33;
+   --teal: #1C7293;
+   --teal-light: #6FA8C4;
+   --gold: #D4AF37;
+   --gold-light: #E9CD6F;
+   --foam: #EAF2F5;
+   --ink: #142433;
+   --muted: #5C7080;
+   --card: #FFFFFF;
+   --acid: #C0524A;
+ }
+ *{ box-sizing: border-box; }
+ html,body{ margin:0; padding:0; font-family: Georgia, Cambria, "Times New Roman", serif; background: var(--foam); color: var(--ink); }
+ .sans{ font-family: Calibri, Arial, "Segoe UI", sans-serif; }
  
-  header.hero{ position: relative; padding: 3rem 1.5rem 2rem; background: var(--navy-dark); color: white; overflow:hidden; }
-  header.hero .eyebrow{ font-family: Calibri, Arial, sans-serif; letter-spacing: 3px; font-size: 0.8rem; color: var(--gold-light); font-weight: bold; text-transform: uppercase; }
-  header.hero h1{ font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 0.3rem 0 0.4rem; font-weight: 700; }
-  header.hero p.sub{ font-family: Calibri, Arial, sans-serif; font-style: italic; color: #C8DCE6; font-size: 1.05rem; max-width: 660px; margin: 0; }
+ header.hero{ position: relative; padding: 3rem 1.5rem 2rem; background: var(--navy-dark); color: white; overflow:hidden; }
+ header.hero .eyebrow{ font-family: Calibri, Arial, sans-serif; letter-spacing: 3px; font-size: 0.8rem; color: var(--gold-light); font-weight: bold; text-transform: uppercase; }
+ header.hero h1{ font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 0.3rem 0 0.4rem; font-weight: 700; }
+ header.hero p.sub{ font-family: Calibri, Arial, sans-serif; font-style: italic; color: #C8DCE6; font-size: 1.05rem; max-width: 660px; margin: 0; }
  
-  main{ max-width: 1100px; margin: 0 auto; padding: 2.2rem 1.5rem 4rem; }
-  section{ margin-bottom: 3.2rem; }
-  section h2{ font-size: 1.7rem; color: var(--navy); margin-bottom: 0.25rem; }
-  section .lead{ font-family: Calibri, Arial, sans-serif; color: var(--muted); font-style: italic; margin-top: 0; margin-bottom: 1.3rem; }
+ main{ max-width: 1100px; margin: 0 auto; padding: 2.2rem 1.5rem 4rem; }
+ section{ margin-bottom: 3.2rem; }
+ section h2{ font-size: 1.7rem; color: var(--navy); margin-bottom: 0.25rem; }
+ section .lead{ font-family: Calibri, Arial, sans-serif; color: var(--muted); font-style: italic; margin-top: 0; margin-bottom: 1.3rem; }
  
-  /* ---------------- pH SLIDER ---------------- */
-  .ph-wrap{ background: var(--navy-dark); border-radius: 16px; padding: 1.8rem; color: white; }
-  .ph-scale-row{ display:flex; border-radius: 8px; overflow:hidden; height: 60px; margin-bottom: 0.6rem; }
-  .ph-cell{ flex:1; display:flex; align-items:center; justify-content:center; font-family: Calibri, Arial, sans-serif; font-weight:bold; font-size: 0.85rem; color: rgba(0,0,0,0.55); border-right: 1px solid rgba(255,255,255,0.4); position:relative; }
-  .ph-cell:last-child{ border-right:none; }
-  .ph-marker{
-    position:absolute; top:-14px; width: 3px; background: white; height: 74px;
-    transition: left 0.15s ease;
-    pointer-events:none;
-  }
-  .ph-marker::after{
-    content: '▼'; position:absolute; top:-16px; left:50%; transform: translateX(-50%); color: white; font-size:14px;
-  }
-  .ph-readout-row{ display:flex; align-items:center; gap: 1.5rem; margin: 1.3rem 0; flex-wrap:wrap; }
-  input[type=range]{ flex:1; min-width:220px; -webkit-appearance:none; height: 6px; border-radius: 4px; background: linear-gradient(90deg, #B23A32, #D4AF37, #2C5C87); outline:none; }
-  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width: 22px; height:22px; border-radius:50%; background: white; border: 3px solid var(--navy); cursor:pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
-  input[type=range]::-moz-range-thumb{ width: 22px; height:22px; border-radius:50%; background: white; border: 3px solid var(--navy); cursor:pointer; }
-  .ph-stats{ display:flex; gap: 1rem; flex-wrap:wrap; }
-  .ph-stat{ background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:10px; padding: 0.7rem 1.1rem; font-family: Calibri, Arial, sans-serif; }
-  .ph-stat .label{ font-size:0.7rem; letter-spacing:1px; color: var(--gold-light); font-weight:bold; text-transform:uppercase; }
-  .ph-stat .value{ font-size: 1.3rem; font-weight:bold; color:white; }
-  .ph-desc{ font-family: Calibri, Arial, sans-serif; font-size: 0.92rem; line-height:1.5; color: #DCE9EF; background: rgba(255,255,255,0.06); border-left: 3px solid var(--gold); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; margin-top: 0.8rem; }
+ /* ---------------- pH SLIDER ---------------- */
+ .ph-wrap{ background: var(--navy-dark); border-radius: 16px; padding: 1.8rem; color: white; }
+ .ph-scale-row{ display:flex; border-radius: 8px; overflow:hidden; height: 60px; margin-bottom: 0.6rem; }
+ .ph-cell{ flex:1; display:flex; align-items:center; justify-content:center; font-family: Calibri, Arial, sans-serif; font-weight:bold; font-size: 0.85rem; color: rgba(0,0,0,0.55); border-right: 1px solid rgba(255,255,255,0.4); position:relative; }
+ .ph-cell:last-child{ border-right:none; }
+ .ph-marker{
+   position:absolute; top:-14px; width: 3px; background: white; height: 74px;
+   transition: left 0.15s ease;
+   pointer-events:none;
+ }
+ .ph-marker::after{
+   content: '▼'; position:absolute; top:-16px; left:50%; transform: translateX(-50%); color: white; font-size:14px;
+ }
+ .ph-readout-row{ display:flex; align-items:center; gap: 1.5rem; margin: 1.3rem 0; flex-wrap:wrap; }
+ input[type=range]{ flex:1; min-width:220px; -webkit-appearance:none; height: 6px; border-radius: 4px; background: linear-gradient(90deg, #B23A32, #D4AF37, #2C5C87); outline:none; }
+ input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width: 22px; height:22px; border-radius:50%; background: white; border: 3px solid var(--navy); cursor:pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.4); }
+ input[type=range]::-moz-range-thumb{ width: 22px; height:22px; border-radius:50%; background: white; border: 3px solid var(--navy); cursor:pointer; }
+ .ph-stats{ display:flex; gap: 1rem; flex-wrap:wrap; }
+ .ph-stat{ background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:10px; padding: 0.7rem 1.1rem; font-family: Calibri, Arial, sans-serif; }
+ .ph-stat .label{ font-size:0.7rem; letter-spacing:1px; color: var(--gold-light); font-weight:bold; text-transform:uppercase; }
+ .ph-stat .value{ font-size: 1.3rem; font-weight:bold; color:white; }
+ .ph-desc{ font-family: Calibri, Arial, sans-serif; font-size: 0.92rem; line-height:1.5; color: #DCE9EF; background: rgba(255,255,255,0.06); border-left: 3px solid var(--gold); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; margin-top: 0.8rem; }
  
-  /* ---------------- REACTION BUILDER ---------------- */
-  .reaction-wrap{ display:flex; flex-direction:column; gap: 1rem; }
-  .reaction-btn-row{ display:flex; gap: 0.7rem; flex-wrap:wrap; }
-  .reaction-btn{ font-family: Calibri, Arial, sans-serif; font-weight:bold; font-size:0.85rem; padding: 0.65rem 1.1rem; border-radius: 8px; border: 2px solid var(--teal); background:white; color: var(--navy); cursor:pointer; }
-  .reaction-btn.active{ background: var(--teal); color:white; }
-  .reaction-stage{ background: var(--card); border:1px solid #E4E9ED; border-radius:12px; padding: 1.8rem; text-align:center; min-height: 160px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  .reaction-eq{ font-size: 1.7rem; font-weight:bold; color: var(--navy); margin-bottom: 0.8rem; }
-  .reaction-eq .plus{ color: var(--muted); margin: 0 0.3rem; }
-  .reaction-eq .arrow{ color: var(--gold); margin: 0 0.4rem; }
-  .reaction-eq .product{ color: var(--acid); }
-  .reaction-caption{ font-family: Calibri, Arial, sans-serif; font-size: 0.95rem; color: var(--ink); max-width: 620px; }
+ /* ---------------- REACTION BUILDER ---------------- */
+ .reaction-wrap{ display:flex; flex-direction:column; gap: 1rem; }
+ .reaction-btn-row{ display:flex; gap: 0.7rem; flex-wrap:wrap; }
+ .reaction-btn{ font-family: Calibri, Arial, sans-serif; font-weight:bold; font-size:0.85rem; padding: 0.65rem 1.1rem; border-radius: 8px; border: 2px solid var(--teal); background:white; color: var(--navy); cursor:pointer; }
+ .reaction-btn.active{ background: var(--teal); color:white; }
+ .reaction-stage{ background: var(--card); border:1px solid #E4E9ED; border-radius:12px; padding: 1.8rem; text-align:center; min-height: 160px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+ .reaction-eq{ font-size: 1.7rem; font-weight:bold; color: var(--navy); margin-bottom: 0.8rem; }
+ .reaction-eq .plus{ color: var(--muted); margin: 0 0.3rem; }
+ .reaction-eq .arrow{ color: var(--gold); margin: 0 0.4rem; }
+ .reaction-eq .product{ color: var(--acid); }
+ .reaction-caption{ font-family: Calibri, Arial, sans-serif; font-size: 0.95rem; color: var(--ink); max-width: 620px; }
  
-  /* ---------------- GAS CARDS ---------------- */
-  .gas-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  @media (max-width: 800px){ .gas-grid{ grid-template-columns: 1fr; } }
-  .gas-card{ border-radius: 12px; overflow:hidden; border:1px solid #E4E9ED; cursor:pointer; transition: transform 0.15s ease; }
-  .gas-card:hover{ transform: translateY(-3px); }
-  .gas-card .gas-head{ padding: 1rem 1.2rem; color:white; font-family: Calibri, Arial, sans-serif; }
-  .gas-card .gas-head .name{ font-size:0.75rem; font-weight:bold; letter-spacing:1px; text-transform:uppercase; opacity:0.85; }
-  .gas-card .gas-head .formula{ font-family: Cambria, Georgia, serif; font-size: 2rem; font-weight:bold; }
-  .gas-card .gas-body{ background:white; padding: 1.1rem 1.2rem; font-family: Calibri, Arial, sans-serif; font-size: 0.9rem; color: var(--ink); display:none; }
-  .gas-card.open .gas-body{ display:block; }
-  .gas-body p{ margin: 0 0 0.6rem; }
-  .gas-body p:last-child{ margin-bottom:0; }
-  .gas-body b{ color: var(--navy); }
-  .gas-hint{ font-family: Calibri, Arial, sans-serif; font-size: 0.75rem; color: var(--muted); text-align:center; padding: 0.5rem; background: #F5F8FA; }
+ /* ---------------- GAS CARDS ---------------- */
+ .gas-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+ @media (max-width: 800px){ .gas-grid{ grid-template-columns: 1fr; } }
+ .gas-card{ border-radius: 12px; overflow:hidden; border:1px solid #E4E9ED; cursor:pointer; transition: transform 0.15s ease; }
+ .gas-card:hover{ transform: translateY(-3px); }
+ .gas-card .gas-head{ padding: 1rem 1.2rem; color:white; font-family: Calibri, Arial, sans-serif; }
+ .gas-card .gas-head .name{ font-size:0.75rem; font-weight:bold; letter-spacing:1px; text-transform:uppercase; opacity:0.85; }
+ .gas-card .gas-head .formula{ font-family: Cambria, Georgia, serif; font-size: 2rem; font-weight:bold; }
+ .gas-card .gas-body{ background:white; padding: 1.1rem 1.2rem; font-family: Calibri, Arial, sans-serif; font-size: 0.9rem; color: var(--ink); display:none; }
+ .gas-card.open .gas-body{ display:block; }
+ .gas-body p{ margin: 0 0 0.6rem; }
+ .gas-body p:last-child{ margin-bottom:0; }
+ .gas-body b{ color: var(--navy); }
+ .gas-hint{ font-family: Calibri, Arial, sans-serif; font-size: 0.75rem; color: var(--muted); text-align:center; padding: 0.5rem; background: #F5F8FA; }
  
-  /* ---------------- QUICK CHECK ---------------- */
-  .quiz-item{ background: var(--card); border: 1px solid #E4E9ED; border-radius: 12px; padding: 1.1rem 1.3rem; margin-bottom: 1rem; }
-  .quiz-item p.q{ font-weight:bold; margin: 0 0 0.7rem; font-size: 1.02rem; }
-  .quiz-options{ display:flex; gap: 0.6rem; flex-wrap:wrap; margin-bottom: 0.6rem; }
-  .quiz-btn{ font-family: Calibri, Arial, sans-serif; font-size: 0.85rem; padding: 0.5rem 1rem; border-radius: 20px; border: 2px solid var(--teal); background: white; color: var(--navy); cursor:pointer; }
-  .quiz-btn.correct{ background:#1C7293; color:white; border-color:#1C7293; }
-  .quiz-btn.incorrect{ background:#c65b5b; color:white; border-color:#c65b5b; }
-  .quiz-feedback{ font-family: Calibri, Arial, sans-serif; font-size: 0.88rem; color: var(--muted); display:none; }
+ /* ---------------- QUICK CHECK ---------------- */
+ .quiz-item{ background: var(--card); border: 1px solid #E4E9ED; border-radius: 12px; padding: 1.1rem 1.3rem; margin-bottom: 1rem; }
+ .quiz-item p.q{ font-weight:bold; margin: 0 0 0.7rem; font-size: 1.02rem; }
+ .quiz-options{ display:flex; gap: 0.6rem; flex-wrap:wrap; margin-bottom: 0.6rem; }
+ .quiz-btn{ font-family: Calibri, Arial, sans-serif; font-size: 0.85rem; padding: 0.5rem 1rem; border-radius: 20px; border: 2px solid var(--teal); background: white; color: var(--navy); cursor:pointer; }
+ .quiz-btn.correct{ background:#1C7293; color:white; border-color:#1C7293; }
+ .quiz-btn.incorrect{ background:#c65b5b; color:white; border-color:#c65b5b; }
+ .quiz-feedback{ font-family: Calibri, Arial, sans-serif; font-size: 0.88rem; color: var(--muted); display:none; }
  
-  footer{ text-align:center; font-family: Calibri, Arial, sans-serif; color: var(--muted); font-size: 0.8rem; padding: 1.5rem; }
+ footer{ text-align:center; font-family: Calibri, Arial, sans-serif; color: var(--muted); font-size: 0.8rem; padding: 1.5rem; }
 </style>
 </head>
 <body>
  
 <header class="hero">
-  <div class="eyebrow">OCEANOGRAPHY · INTERACTIVE COMPANION</div>
-  <h1>The Ocean's Chemistry</h1>
-  <p class="sub">Drag, click, and explore how pH, carbon dioxide, and dissolved gases keep the ocean in balance.</p>
+ <div class="eyebrow">OCEANOGRAPHY · INTERACTIVE COMPANION</div>
+ <h1>The Ocean's Chemistry</h1>
+ <p class="sub">Drag, click, and explore how pH, carbon dioxide, and dissolved gases keep the ocean in balance.</p>
 </header>
  
 <main>
  
-  <section>
-    <h2>Explore the pH Scale</h2>
-    <p class="lead">Slide across the scale to see how acidity, hydrogen ion concentration, and the ocean's normal range relate to each other.</p>
+ <section>
+   <h2>Explore the pH Scale</h2>
+   <p class="lead">Slide across the scale to see how acidity, hydrogen ion concentration, and the ocean's normal range relate to each other.</p>
  
-    <div class="ph-wrap">
-      <div class="ph-scale-row" id="phScaleRow"></div>
-      <div style="position:relative; height:0;">
-        <div class="ph-marker" id="phMarker"></div>
-      </div>
-      <div class="ph-readout-row">
-        <input type="range" id="phSlider" min="1" max="14" step="0.1" value="8">
-        <div class="ph-stats sans">
-          <div class="ph-stat"><div class="label">pH Value</div><div class="value" id="phValue">8.0</div></div>
-          <div class="ph-stat"><div class="label">Relative to pH 7</div><div class="value" id="phRelative">×10</div></div>
-        </div>
-      </div>
-      <div class="ph-desc sans" id="phDesc">This is within the ocean's normal range (7.5–8.5) — slightly basic, and closely tied to how much CO₂ is currently dissolved.</div>
-    </div>
-  </section>
+   <div class="ph-wrap">
+     <div class="ph-scale-row" id="phScaleRow"></div>
+     <div style="position:relative; height:0;">
+       <div class="ph-marker" id="phMarker"></div>
+     </div>
+     <div class="ph-readout-row">
+       <input type="range" id="phSlider" min="1" max="14" step="0.1" value="8">
+       <div class="ph-stats sans">
+         <div class="ph-stat"><div class="label">pH Value</div><div class="value" id="phValue">8.0</div></div>
+         <div class="ph-stat"><div class="label">Relative to pH 7</div><div class="value" id="phRelative">×10</div></div>
+       </div>
+     </div>
+     <div class="ph-desc sans" id="phDesc">This is within the ocean's normal range (7.5–8.5) — slightly basic, and closely tied to how much CO₂ is currently dissolved.</div>
+   </div>
+ </section>
  
-  <section>
-    <h2>Build the CO₂ Reaction</h2>
-    <p class="lead">Click through both steps to see how dissolved carbon dioxide gradually acidifies seawater.</p>
+ <section>
+   <h2>Build the CO₂ Reaction</h2>
+   <p class="lead">Click through both steps to see how dissolved carbon dioxide gradually acidifies seawater.</p>
  
-    <div class="reaction-wrap">
-      <div class="reaction-btn-row">
-        <button class="reaction-btn active" data-step="1">STEP 1: CO₂ DISSOLVES</button>
-        <button class="reaction-btn" data-step="2">STEP 2: ACID BREAKS APART</button>
-      </div>
-      <div class="reaction-stage">
-        <div class="reaction-eq" id="reactionEq">CO₂ <span class="plus">+</span> H₂O <span class="arrow">→</span> <span class="product">H₂CO₃</span></div>
-        <div class="reaction-caption sans" id="reactionCaption">
-          Dissolved carbon dioxide reacts with water molecules to form carbonic acid — a weak acid that starts nudging the water's pH downward.
-        </div>
-      </div>
-    </div>
-  </section>
+   <div class="reaction-wrap">
+     <div class="reaction-btn-row">
+       <button class="reaction-btn active" data-step="1">STEP 1: CO₂ DISSOLVES</button>
+       <button class="reaction-btn" data-step="2">STEP 2: ACID BREAKS APART</button>
+     </div>
+     <div class="reaction-stage">
+       <div class="reaction-eq" id="reactionEq">CO₂ <span class="plus">+</span> H₂O <span class="arrow">→</span> <span class="product">H₂CO₃</span></div>
+       <div class="reaction-caption sans" id="reactionCaption">
+         Dissolved carbon dioxide reacts with water molecules to form carbonic acid — a weak acid that starts nudging the water's pH downward.
+       </div>
+     </div>
+   </div>
+ </section>
  
-  <section>
-    <h2>Three Dissolved Gases</h2>
-    <p class="lead">Tap a card to reveal where each gas comes from and what it does in the ocean.</p>
+ <section>
+   <h2>Three Dissolved Gases</h2>
+   <p class="lead">Tap a card to reveal where each gas comes from and what it does in the ocean.</p>
  
-    <div class="gas-grid" id="gasGrid"></div>
-  </section>
+   <div class="gas-grid" id="gasGrid"></div>
+ </section>
  
-  <section>
-    <h2>Quick Check</h2>
-    <p class="lead">Test what you've learned.</p>
-    <div id="quizContainer"></div>
-  </section>
+ <section>
+   <h2>Quick Check</h2>
+   <p class="lead">Test what you've learned.</p>
+   <div id="quizContainer"></div>
+ </section>
  
 </main>
  
@@ -166,16 +163,16 @@ Ocean chemistry interactive · HTML
 // ---------------- pH SCALE ----------------
 const phRow = document.getElementById('phScaleRow');
 const phColors = [
-  "#B23A32","#B94A3F","#C15A4B","#C97A5B","#D08D66","#D6A170","#DCB27C",
-  "#D4AF37","#B7CBDA","#9BC0D3","#7FB4CC","#63A0BE","#4D8BAF","#2C5C87"
+ "#B23A32","#B94A3F","#C15A4B","#C97A5B","#D08D66","#D6A170","#DCB27C",
+ "#D4AF37","#B7CBDA","#9BC0D3","#7FB4CC","#63A0BE","#4D8BAF","#2C5C87"
 ];
 for(let i=1;i<=14;i++){
-  const c = document.createElement('div');
-  c.className='ph-cell';
-  c.style.background = phColors[i-1];
-  c.textContent = i;
-  if(i<=7) c.style.color = 'rgba(255,255,255,0.85)';
-  phRow.appendChild(c);
+ const c = document.createElement('div');
+ c.className='ph-cell';
+ c.style.background = phColors[i-1];
+ c.textContent = i;
+ if(i<=7) c.style.color = 'rgba(255,255,255,0.85)';
+ phRow.appendChild(c);
 }
  
 const phSlider = document.getElementById('phSlider');
@@ -185,24 +182,24 @@ const phDesc = document.getElementById('phDesc');
 const phMarker = document.getElementById('phMarker');
  
 function phDescription(v){
-  if(v < 6) return "Strongly acidic — far outside anything seawater normally experiences. Concentrations of hydrogen ions this high would be devastating to marine life.";
-  if(v < 7.5) return "Slightly acidic — below the ocean's normal range. Increased dissolved CO₂ can push pH this direction, a process called ocean acidification.";
-  if(v <= 8.5) return "This is within the ocean's normal range (7.5–8.5) — slightly basic, and closely tied to how much CO₂ is currently dissolved.";
-  if(v <= 10) return "Slightly more basic than typical seawater — this range is less common but not extreme.";
-  return "Strongly basic — well outside the range seawater normally occupies.";
+ if(v < 6) return "Strongly acidic — far outside anything seawater normally experiences. Concentrations of hydrogen ions this high would be devastating to marine life.";
+ if(v < 7.5) return "Slightly acidic — below the ocean's normal range. Increased dissolved CO₂ can push pH this direction, a process called ocean acidification.";
+ if(v <= 8.5) return "This is within the ocean's normal range (7.5–8.5) — slightly basic, and closely tied to how much CO₂ is currently dissolved.";
+ if(v <= 10) return "Slightly more basic than typical seawater — this range is less common but not extreme.";
+ return "Strongly basic — well outside the range seawater normally occupies.";
 }
  
 function updatePh(){
-  const v = parseFloat(phSlider.value);
-  phValue.textContent = v.toFixed(1);
-  const diff = 7 - v;
-  const factor = Math.pow(10, diff);
-  if(Math.abs(diff) < 0.05){ phRelative.textContent = "same as pH 7"; }
-  else if(diff > 0){ phRelative.textContent = "×" + (factor >= 100 ? factor.toFixed(0) : factor.toFixed(1)) + " more H⁺"; }
-  else { phRelative.textContent = "÷" + (1/factor >= 100 ? (1/factor).toFixed(0) : (1/factor).toFixed(1)) + " fewer H⁺"; }
-  phDesc.textContent = phDescription(v);
-  const pct = (v - 1) / 13;
-  phMarker.style.left = (pct * 100) + "%";
+ const v = parseFloat(phSlider.value);
+ phValue.textContent = v.toFixed(1);
+ const diff = 7 - v;
+ const factor = Math.pow(10, diff);
+ if(Math.abs(diff) < 0.05){ phRelative.textContent = "same as pH 7"; }
+ else if(diff > 0){ phRelative.textContent = "×" + (factor >= 100 ? factor.toFixed(0) : factor.toFixed(1)) + " more H⁺"; }
+ else { phRelative.textContent = "÷" + (1/factor >= 100 ? (1/factor).toFixed(0) : (1/factor).toFixed(1)) + " fewer H⁺"; }
+ phDesc.textContent = phDescription(v);
+ const pct = (v - 1) / 13;
+ phMarker.style.left = (pct * 100) + "%";
 }
 phSlider.addEventListener('input', updatePh);
 updatePh();
@@ -212,95 +209,92 @@ const reactionBtns = document.querySelectorAll('.reaction-btn');
 const reactionEq = document.getElementById('reactionEq');
 const reactionCaption = document.getElementById('reactionCaption');
 const reactionData = {
-  1: {
-    eq: 'CO₂ <span class="plus">+</span> H₂O <span class="arrow">→</span> <span class="product">H₂CO₃</span>',
-    caption: "Dissolved carbon dioxide reacts with water molecules to form carbonic acid — a weak acid that starts nudging the water's pH downward."
-  },
-  2: {
-    eq: 'H₂CO₃ <span class="arrow">→</span> HCO₃⁻ <span class="plus">+</span> <span class="product">H⁺</span>',
-    caption: "Carbonic acid splits apart into bicarbonate and a free hydrogen ion. That extra H⁺ is what actually makes the water more acidic — lowering the pH further."
-  }
+ 1: {
+   eq: 'CO₂ <span class="plus">+</span> H₂O <span class="arrow">→</span> <span class="product">H₂CO₃</span>',
+   caption: "Dissolved carbon dioxide reacts with water molecules to form carbonic acid — a weak acid that starts nudging the water's pH downward."
+ },
+ 2: {
+   eq: 'H₂CO₃ <span class="arrow">→</span> HCO₃⁻ <span class="plus">+</span> <span class="product">H⁺</span>',
+   caption: "Carbonic acid splits apart into bicarbonate and a free hydrogen ion. That extra H⁺ is what actually makes the water more acidic — lowering the pH further."
+ }
 };
 reactionBtns.forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    reactionBtns.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const d = reactionData[btn.dataset.step];
-    reactionEq.innerHTML = d.eq;
-    reactionCaption.textContent = d.caption;
-  });
+ btn.addEventListener('click', ()=>{
+   reactionBtns.forEach(b=>b.classList.remove('active'));
+   btn.classList.add('active');
+   const d = reactionData[btn.dataset.step];
+   reactionEq.innerHTML = d.eq;
+   reactionCaption.textContent = d.caption;
+ });
 });
  
 // ---------------- GAS CARDS ----------------
 const gasData = [
-  { formula: "CO₂", name: "Carbon Dioxide", color: "#C0524A",
-    body: "<p><b>Source:</b> Enters from the atmosphere and from the respiration of marine organisms.</p><p><b>Behavior:</b> Highly soluble — seawater holds roughly 50 times more CO₂ than the atmosphere, with levels staying fairly steady (45–54 mL/L) over long periods.</p><p><b>Role:</b> A reactant in photosynthesis, a product of respiration, and stored long-term in shells and sediments.</p>" },
-  { formula: "N₂", name: "Nitrogen", color: "#1C7293",
-    body: "<p><b>Source:</b> Dissolves from the atmosphere, which is about 78% nitrogen gas.</p><p><b>Behavior:</b> The most abundant dissolved gas in the ocean — but mostly unusable in its raw form.</p><p><b>Role:</b> Must first be converted through nitrogen fixation (often by blue-green algae) before organisms can use it to build proteins and amino acids.</p>" },
-  { formula: "O₂", name: "Oxygen", color: "#0B2E4F",
-    body: "<p><b>Source:</b> Released by marine plants and algae during photosynthesis, and mixed in by wave action.</p><p><b>Behavior:</b> Not very soluble — much of it diffuses back out into the air rather than staying dissolved.</p><p><b>Role:</b> Essential for respiration, but scarce once you drop below the thermocline.</p>" },
+ { formula: "CO₂", name: "Carbon Dioxide", color: "#C0524A",
+   body: "<p><b>Source:</b> Enters from the atmosphere and from the respiration of marine organisms.</p><p><b>Behavior:</b> Highly soluble — seawater holds roughly 50 times more CO₂ than the atmosphere, with levels staying fairly steady (45–54 mL/L) over long periods.</p><p><b>Role:</b> A reactant in photosynthesis, a product of respiration, and stored long-term in shells and sediments.</p>" },
+ { formula: "N₂", name: "Nitrogen", color: "#1C7293",
+   body: "<p><b>Source:</b> Dissolves from the atmosphere, which is about 78% nitrogen gas.</p><p><b>Behavior:</b> The most abundant dissolved gas in the ocean — but mostly unusable in its raw form.</p><p><b>Role:</b> Must first be converted through nitrogen fixation (often by blue-green algae) before organisms can use it to build proteins and amino acids.</p>" },
+ { formula: "O₂", name: "Oxygen", color: "#0B2E4F",
+   body: "<p><b>Source:</b> Released by marine plants and algae during photosynthesis, and mixed in by wave action.</p><p><b>Behavior:</b> Not very soluble — much of it diffuses back out into the air rather than staying dissolved.</p><p><b>Role:</b> Essential for respiration, but scarce once you drop below the thermocline.</p>" },
 ];
 const gasGrid = document.getElementById('gasGrid');
 gasData.forEach((g)=>{
-  const card = document.createElement('div');
-  card.className = 'gas-card';
-  card.innerHTML = `
-    <div class="gas-head" style="background:${g.color};">
-      <div class="name">${g.name}</div>
-      <div class="formula">${g.formula}</div>
-    </div>
-    <div class="gas-body">${g.body}</div>
-    <div class="gas-hint">Tap to ${'expand'}</div>
-  `;
-  card.addEventListener('click', ()=>{
-    const wasOpen = card.classList.contains('open');
-    document.querySelectorAll('.gas-card').forEach(c=>{ c.classList.remove('open'); c.querySelector('.gas-hint').textContent = 'Tap to expand'; });
-    if(!wasOpen){ card.classList.add('open'); card.querySelector('.gas-hint').textContent = 'Tap to collapse'; }
-  });
-  gasGrid.appendChild(card);
+ const card = document.createElement('div');
+ card.className = 'gas-card';
+ card.innerHTML = `
+   <div class="gas-head" style="background:${g.color};">
+     <div class="name">${g.name}</div>
+     <div class="formula">${g.formula}</div>
+   </div>
+   <div class="gas-body">${g.body}</div>
+   <div class="gas-hint">Tap to ${'expand'}</div>
+ `;
+ card.addEventListener('click', ()=>{
+   const wasOpen = card.classList.contains('open');
+   document.querySelectorAll('.gas-card').forEach(c=>{ c.classList.remove('open'); c.querySelector('.gas-hint').textContent = 'Tap to expand'; });
+   if(!wasOpen){ card.classList.add('open'); card.querySelector('.gas-hint').textContent = 'Tap to collapse'; }
+ });
+ gasGrid.appendChild(card);
 });
  
 // ---------------- QUICK CHECK ----------------
 const quizData = [
-  { q: "A solution changes from pH 8 to pH 6. How many times greater is the hydrogen ion concentration at pH 6?", options: ["2 times", "20 times", "100 times"], answer: "100 times" },
-  { q: "Which best describes what happens when CO₂ dissolves in seawater?", options: ["pH rises", "pH falls", "pH stays exactly the same"], answer: "pH falls" },
-  { q: "Why can't most marine organisms use dissolved nitrogen gas directly?", options: ["It's too rare in seawater", "It must be \"fixed\" into a usable form first", "It only exists below the thermocline"], answer: "It must be \"fixed\" into a usable form first" },
-  { q: "Why does dissolved oxygen become scarce below the thermocline?", options: ["Oxygen is not very soluble and doesn't mix down easily", "Fish consume all of it near the surface", "Oxygen turns into nitrogen at depth"], answer: "Oxygen is not very soluble and doesn't mix down easily" },
+ { q: "A solution changes from pH 8 to pH 6. How many times greater is the hydrogen ion concentration at pH 6?", options: ["2 times", "20 times", "100 times"], answer: "100 times" },
+ { q: "Which best describes what happens when CO₂ dissolves in seawater?", options: ["pH rises", "pH falls", "pH stays exactly the same"], answer: "pH falls" },
+ { q: "Why can't most marine organisms use dissolved nitrogen gas directly?", options: ["It's too rare in seawater", "It must be \"fixed\" into a usable form first", "It only exists below the thermocline"], answer: "It must be \"fixed\" into a usable form first" },
+ { q: "Why does dissolved oxygen become scarce below the thermocline?", options: ["Oxygen is not very soluble and doesn't mix down easily", "Fish consume all of it near the surface", "Oxygen turns into nitrogen at depth"], answer: "Oxygen is not very soluble and doesn't mix down easily" },
 ];
 const quizContainer = document.getElementById('quizContainer');
 quizData.forEach((item, idx)=>{
-  const div = document.createElement('div');
-  div.className = 'quiz-item';
-  const optsHtml = item.options.map(o=>`<button class="quiz-btn sans" data-choice="${o}">${o}</button>`).join('');
-  div.innerHTML = `
-    <p class="q">${idx+1}. ${item.q}</p>
-    <div class="quiz-options">${optsHtml}</div>
-    <div class="quiz-feedback sans"></div>
-  `;
-  quizContainer.appendChild(div);
+ const div = document.createElement('div');
+ div.className = 'quiz-item';
+ const answerIdx = item.options.indexOf(item.answer);
+ const optsHtml = item.options.map((o, i)=>`<button class="quiz-btn sans" data-idx="${i}">${o}</button>`).join('');
+ div.innerHTML = `
+   <p class="q">${idx+1}. ${item.q}</p>
+   <div class="quiz-options">${optsHtml}</div>
+   <div class="quiz-feedback sans"></div>
+ `;
+ quizContainer.appendChild(div);
  
-  const buttons = div.querySelectorAll('.quiz-btn');
-  const feedback = div.querySelector('.quiz-feedback');
-  buttons.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      buttons.forEach(b=>{ b.classList.remove('correct','incorrect'); b.disabled = true; });
-      if(btn.dataset.choice === item.answer){
-        btn.classList.add('correct');
-        feedback.textContent = "Correct!";
-      } else {
-        btn.classList.add('incorrect');
-        buttons.forEach(b=>{ if(b.dataset.choice === item.answer) b.classList.add('correct'); });
-        feedback.textContent = "Not quite — the correct answer is highlighted above.";
-      }
-      feedback.style.display = 'block';
-    });
-  });
+ const buttons = div.querySelectorAll('.quiz-btn');
+ const feedback = div.querySelector('.quiz-feedback');
+ buttons.forEach(btn=>{
+   btn.addEventListener('click', ()=>{
+     buttons.forEach(b=>{ b.classList.remove('correct','incorrect'); b.disabled = true; });
+     if(Number(btn.dataset.idx) === answerIdx){
+       btn.classList.add('correct');
+       feedback.textContent = "Correct!";
+     } else {
+       btn.classList.add('incorrect');
+       buttons.forEach(b=>{ if(Number(b.dataset.idx) === answerIdx) b.classList.add('correct'); });
+       feedback.textContent = "Not quite — the correct answer is highlighted above.";
+     }
+     feedback.style.display = 'block';
+   });
+ });
 });
 </script>
  
 </body>
 </html>
- 
-
-
-CollapseCollapse
